@@ -32,8 +32,12 @@ error_MMSEtNSA2 = np.zeros(SNRNum)
 error_MMSEtNSA3 = np.zeros(SNRNum)
 error_MMSElNSA2 = np.zeros(SNRNum)
 error_MMSElNSA3 = np.zeros(SNRNum)
+
+# Tri-diagonal Matrix Generation
 def tridiag(a, b, c, k1=-1, k2=0, k3=1):
     return np.diag(a, k1) + np.diag(b, k2) + np.diag(c, k3)
+
+
 def GenerateTestData(TxAntNum, RxAntNum, DataLen, SNRdBLow, SNRdBHigh):
     x_ = np.random.randint(0,2,(TxAntNum,1))
     for i in range (0,TxAntNum):
@@ -81,7 +85,7 @@ def MMSEtest(x, y, H, Nv):
     return error_MMSE
 
 
-
+# NSA iteration = 4
 def MMSE_NSA3test(x, y, H, Nv):
     error_MMSENSA3 = 0
 
@@ -91,19 +95,19 @@ def MMSE_NSA3test(x, y, H, Nv):
     HTy = np.matmul(HT, y)
     o = Nv ** 2 * np.identity(TxAntNum)
     A = HTH + o
-    # print(H)
-    # print('wwwwwwwwwwwwwwwwwwwwwwwww')
-    # print(HT)
 
     v = np.diag(A)
+    # Diagonal Matrix Generation
     D = np.diag(v)
 
+    # Inverse of Diagonal Matrix
     u_r = np.zeros(TxAntNum)
     u_i = np.zeros(TxAntNum)
     for index in range (0,TxAntNum):
         u_r[index] = v[index].real/abs(v[index])**2
         u_i[index] = v[index].imag/abs(v[index])**2
     u = u_r+1j*u_i
+    
     Dinv = np.diag(u)
 
     E = A - D
@@ -180,6 +184,8 @@ def MMSE_NSA4test(x, y, H, Nv):
             error_MMSENSA4 += 1
     return error_MMSENSA4
 
+# Weighted NSA
+# Uses The matrix w*D as Iterative Matrix Instead 
 def MMSE_wNSA3test(x, y, H, Nv):
     error_MMSENSA3 = 0
 
@@ -189,9 +195,7 @@ def MMSE_wNSA3test(x, y, H, Nv):
     HTy = np.matmul(HT, y)
     o = Nv ** 2 * np.identity(TxAntNum)
     A = HTH + o
-    # print(H)
-    # print('wwwwwwwwwwwwwwwwwwwwwwwww')
-    # print(HT)
+
 
     v = np.diag(A)
     D = np.diag(v)
@@ -278,6 +282,9 @@ def MMSE_wNSA4test(x, y, H, Nv):
             error_MMSENSA4 += 1
     return error_MMSENSA4
 
+
+# Tri-Diagonal NSA
+# Uses The Tri-Diagonal Matrix as Iterative Matrix Instead 
 def MMSE_tNSA2test(x, y, H, Nv):
     error_MMSENSA2 = 0
 
