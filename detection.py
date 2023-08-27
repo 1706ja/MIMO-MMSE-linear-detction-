@@ -56,12 +56,16 @@ elif ModType==16:
 
 # Variable Initialization
 error_MMSE = np.zeros(SNRNum)
+# Neumann Series
 error_MMSENSA3 = np.zeros(SNRNum)
 error_MMSENSA4 = np.zeros(SNRNum)
+# successive-overrelaxation
 error_MMSESOR2 = np.zeros(SNRNum)
 error_MMSESOR3 = np.zeros(SNRNum)
+# Gauss-Siedel
 error_MMSEGS3 = np.zeros(SNRNum)
 error_MMSEGS4 = np.zeros(SNRNum)
+# Conjugate Gradient
 error_MMSECG3 = np.zeros(SNRNum)
 error_MMSECG4 = np.zeros(SNRNum)
 
@@ -532,7 +536,7 @@ def MMSECG4test(x, y, H, Nv):
     alpha2 = p.transpose(-2, -1).matmul(A)
     alpha3 = alpha2.matmul(p)
     alpha = alpha1 / alpha3
-    # computation of so known "alpha"
+    # computation of the known "alpha"
     xhat = xhat + torch.mul(alpha, p)
     # improvement of xhat
     beta1 = A.matmul(p)
@@ -541,7 +545,7 @@ def MMSECG4test(x, y, H, Nv):
     # update of r
     beta2 = r.transpose(-2, -1).matmul(r)
     beta = beta2 / alpha1
-    # computation of so known "beta"
+    # computation of the known "beta"
     p = r + torch.mul(p[1], beta[1])
     # update of p
     # k = 4
