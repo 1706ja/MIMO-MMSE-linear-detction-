@@ -177,7 +177,7 @@ def MMSE_NSA4test(x, y, H, Nv):
             error_MMSENSA4 += 1
     return error_MMSENSA4
 
-
+# weighted NSA
 def MMSE_w1NSA3test(x, y, H, Nv):
     error_MMSENSA3 = 0
 
@@ -276,7 +276,7 @@ def MMSE_w1NSA4test(x, y, H, Nv):
         if xhat[i]!=x[i]:
             error_MMSENSA4 += 1
     return error_MMSENSA4
-
+# weighted NSA (w = 0.75)
 def MMSE_w2NSA3test(x, y, H, Nv):
     error_MMSENSA3 = 0
 
