@@ -99,6 +99,7 @@ def KronChannel(TxAntNum, RxAntNum, DataLen, TSratio, RSratio):
 
 # Generating Data Sent, Recived, Noise, and Transmitting Matrix
 def GenerateTestData(SampleNum, TxAntNum, RxAntNum, DataLen, SNRdBLow, SNRdBHigh):
+    # 3-dimensional vector is faster when compiling
     x_ = torch.zeros([SampleNum, 2*TxAntNum, DataLen])
     y_ = torch.zeros([SampleNum, 2*RxAntNum, DataLen])
     H_ = torch.zeros([SampleNum, 2*RxAntNum, 2*TxAntNum])
@@ -140,6 +141,7 @@ def GenerateTestData(SampleNum, TxAntNum, RxAntNum, DataLen, SNRdBLow, SNRdBHigh
 
     return x_, y_, H_, Nv_
 
+# Device 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print(device)
 
@@ -252,17 +254,17 @@ def MMSESOR2test(x,y,H,Nv):
 
     D = torch.diagonal(A, dim1=-2, dim2=-1)
     Dinv = torch.diag_embed(1 / D)
-    # inverse of diagonal matrix
+    # inverse of a diagonal matrix
     E = A - torch.diag_embed(D)
     Nv1 = Nv[0].numpy()
     Nv2 = Nv1[0][0]
-    # this is because Nv is a 3-dimensional vector, and this
+    # This is because Nv is a 3-dimensional vector and this
     # method can translate it to a number
     a = RxAntNum / (TxAntNum + Nv2 ** 2)
     b = 1 + sqrt(TxAntNum / RxAntNum)
     b = b ** 2
     w = 2 / (1 + sqrt(2 * a * b))
-    # computation of weighted factor
+    # Computation of weighted factor
     L = torch.tril(E,-1)
     # lower diagonal matrix
     C = 1/w* torch.diag_embed(D) + L
@@ -280,7 +282,7 @@ def MMSESOR2test(x,y,H,Nv):
     x3 = C2.matmul(x2) + f1
     xhat = x3
 
-    # calculation of BER
+    # Calculation of BER
     _, indices = torch.min((xhat - Cons) ** 2, dim=-1, keepdim=True)
     _, indices_x = torch.min((x - Cons) ** 2, dim=-1, keepdim=True)
     Rxbit = bitCons[indices]
@@ -303,7 +305,7 @@ def MMSESOR3test(x,y,H,Nv):
     E = A - torch.diag_embed(D)
     Nv1 = Nv[0].numpy()
     Nv2 = Nv1[0][0]
-    # this is because Nv is a 3-dimensional vector, and this
+    # This is because Nv is a 3-dimensional vector and this
     # method can translate it to a number
     a = RxAntNum / (TxAntNum + Nv2 ** 2)
     b = 1 + sqrt(TxAntNum / RxAntNum)
@@ -329,7 +331,7 @@ def MMSESOR3test(x,y,H,Nv):
     x4 = C2.matmul(x3) + f1
     xhat = x4
 
-    # calculation of BER
+    # Calculation of BER
     _, indices = torch.min((xhat - Cons) ** 2, dim=-1, keepdim=True)
     _, indices_x = torch.min((x - Cons) ** 2, dim=-1, keepdim=True)
     Rxbit = bitCons[indices]
