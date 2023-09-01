@@ -77,7 +77,7 @@ def MMSEtest(x, y, H, Nv):
             error_MMSE += 1
     return error_MMSE
 
-
+# conjugate-gradient, itr = 3
 def MMSE_CG3test(x, y, H, Nv):
     error_MMSECG3 = 0
 
@@ -219,6 +219,7 @@ def MMSE_CG4test(x, y, H, Nv):
 
     return error_MMSECG4
 
+# pre-computing conjugate-gradient, itr = 3
 def MMSE_pCG3test(x, y, H, Nv):
     error_MMSECG4 = 0
 
@@ -375,6 +376,8 @@ def MMSE_pCG4test(x, y, H, Nv):
 
     return error_MMSECG4
 
+
+# split-CG, itr = 3
 def MMSE_sCG3test(x, y, H, Nv):
     error_MMSECG3 = 0
 
