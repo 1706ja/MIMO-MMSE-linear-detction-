@@ -87,9 +87,6 @@ def MMSE_NSA3test(x, y, H, Nv):
     HTy = np.matmul(HT, y)
     o = Nv ** 2 * np.identity(TxAntNum)
     A = HTH + o
-    # print(H)
-    # print('wwwwwwwwwwwwwwwwwwwwwwwww')
-    # print(HT)
 
     v = np.diag(A)
     D = np.diag(v)
@@ -109,9 +106,7 @@ def MMSE_NSA3test(x, y, H, Nv):
     IDE2 = Dinv - np.matmul(DinvE,Dinv)
     # k=3
     IDE3 = IDE2 + np.matmul(DinvE**2,Dinv)
-    # k=4
-    IDE4 = IDE3 - np.matmul(DinvE**3,Dinv)
-
+    
     Ainv_apr = IDE3
 
     # MIMO detection (MMSE) using perfect CSI
