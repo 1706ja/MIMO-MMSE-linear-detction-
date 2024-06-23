@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 import math
 import cmath
 
-
 # Parameters Settingh
 TestDataLen = 500000
 TxAntNum = 16  # Number of transmitting antennas
