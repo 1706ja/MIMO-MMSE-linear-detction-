@@ -116,8 +116,6 @@ def MMSE_SOR2test(x, y, H, Nv):
     x2 = np.matmul(C,x1)+f
     # k=2
     x3 = np.matmul(C,x2)+f
-    # k = 3
-    x4 = np.matmul(C,x3)+f
 
 
     # MIMO detection (MMSE) using perfect CSI
