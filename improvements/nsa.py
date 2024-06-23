@@ -294,15 +294,9 @@ def MMSE_tNSA2test(x, y, H, Nv):
     HTy = np.matmul(HT, y)
     o = Nv ** 2 * np.identity(TxAntNum)
     A = HTH + o
-    # print(H)
-    # print('wwwwwwwwwwwwwwwwwwwwwwwww')
-    # print(HT)
-
     v = np.diag(A)
     v1 = np.diag(A,-1)
     D = tridiag(v1,v,v1)
-
-
     Dinv = np.linalg.inv(D)
 
     E = A - D
