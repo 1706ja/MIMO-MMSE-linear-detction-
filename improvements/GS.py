@@ -110,14 +110,8 @@ def MMSE_GS3test(x, y, H, Nv):
     x1 = np.matmul(Dinv,HTy)
     # k=1
     x2 = -np.matmul(C,x1)+f
-    # k=2
-    # x3 = -np.matmul(C,x2)+f
-    # # k =3
-    # x4 = -np.matmul(C,x3)+f
-
 
     # MIMO detection (MMSE) using perfect CSI
-
     xhat = x2
     for index in range(0, TxAntNum):
         if xhat[index] > 0:
@@ -160,10 +154,6 @@ def MMSE_GS4test(x, y, H, Nv):
     x2 = -np.matmul(C,x1)+f
     # k=2
     x3 = -np.matmul(C,x2)+f
-    # k =3
-    # x4 = -np.matmul(C,x3)+f
-    #k = 4
-    # x5 = -np.matmul(C,x4)+f
 
     # MIMO detection (MMSE) using perfect CSI
 
