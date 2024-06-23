@@ -59,13 +59,13 @@ error_MMSE = np.zeros(SNRNum)
 # Neumann Series
 error_MMSENSA3 = np.zeros(SNRNum)
 error_MMSENSA4 = np.zeros(SNRNum)
-# successive-overrelaxation
+# Successive-overrelaxation
 error_MMSESOR2 = np.zeros(SNRNum)
 error_MMSESOR3 = np.zeros(SNRNum)
 # Gauss-Siedel
 error_MMSEGS3 = np.zeros(SNRNum)
 error_MMSEGS4 = np.zeros(SNRNum)
-# Conjugate Gradient
+# Conjugate gradient
 error_MMSECG3 = np.zeros(SNRNum)
 error_MMSECG4 = np.zeros(SNRNum)
 
