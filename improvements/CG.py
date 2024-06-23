@@ -32,6 +32,7 @@ error_MMSEsCG3 = np.zeros(SNRNum)
 error_MMSEsCG4 = np.zeros(SNRNum)
 def tridiag(a, b, c, k1=-1, k2=0, k3=1):
     return np.diag(a, k1) + np.diag(b, k2) + np.diag(c, k3)
+    
 def GenerateTestData(TxAntNum, RxAntNum,  SNRdBLow, SNRdBHigh):
     x_ = np.random.randint(0,2,(TxAntNum,1))
     for i in range (0,TxAntNum):
